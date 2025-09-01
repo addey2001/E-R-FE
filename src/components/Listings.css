@@ -1,0 +1,39 @@
+.listings {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.listings h2 {
+  margin-bottom: 1rem;
+}
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+.listing-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.listing-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.listing-info {
+  padding: 1rem;
+}
+.listing-info h3 {
+  margin: 0 0 0.5rem 0;
+}
+.listing-info p {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
