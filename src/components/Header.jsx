@@ -1,7 +1,23 @@
 import React from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
+  const [signedIn, setSignedIn] = React.useState(!!localStorage.getItem('access'));
+
+  React.useEffect(() => {
+    const onStorage = () => setSignedIn(!!localStorage.getItem('access'));
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('access');
+    localStorage.removeItem('refresh');
+    setSignedIn(false);
+    window.dispatchEvent(new Event('storage'));
+  };
+
   return (
     <header className="header">
       <div className="logo">
@@ -14,7 +30,13 @@ export default function Header() {
         <a href="/wishlist">Wishlist</a>
         <a href="/checkout">Checkout</a>
       </nav>
-      <button className="sign-in"> <span role="img" aria-label="sign-in">👤</span> Sign In</button>
+      {!signedIn ? (
+        <Link to="/auth" className="sign-in"> <span role="img" aria-label="sign-in">👤</span> Sign In</Link>
+      ) : (
+        <button className="sign-in" onClick={handleSignOut} style={{marginLeft: 16}}>
+          <span role="img" aria-label="sign-out">🚪</span> Sign Out
+        </button>
+      )}
     </header>
   );
 }
